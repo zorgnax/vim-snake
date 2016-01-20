@@ -21,7 +21,7 @@
 " Another snake game https://github.com/zyedidia/vim-snake
 
 command! Snake call s:init ()
-map s :call <SID>init()<CR>
+map <Leader>s :call <SID>init()<CR>
 
 function! s:init ()
     tabe
