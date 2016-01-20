@@ -26,7 +26,7 @@ map <Leader>s :call <SID>init()<CR>
 function! s:init ()
     tabe
     set showtabline=0
-    set updatetime=50
+    set updatetime=200
     set viminfo+=!
     setlocal buftype=nofile
     let g:SNAKESCORE = exists("g:SNAKESCORE") ? g:SNAKESCORE : 0
@@ -135,8 +135,10 @@ function! s:showscore ()
 endfunction
 
 function! s:eatapple (head)
-    for apple in b:apples
+    for i in range(len(b:apples))
+        let apple = b:apples[i]
         if a:head == apple
+            call remove(b:apples, i)
             return 1
         endif
     endfor
@@ -144,14 +146,10 @@ function! s:eatapple (head)
 endfunction
 
 function! s:placeapples ()
-    for apple in b:apples
-        if getline(apple[0])[apple[1] - 1] == "o"
-            call cursor(apple[0], apple[1])
-            exe "normal r "
-        endif
-    endfor
+    if len(b:apples) > 20
+        return
+    endif
 
-    let b:apples = []
     let n = 1 + s:rand() % 15
     let i = 0
     while 1
