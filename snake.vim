@@ -1,7 +1,7 @@
 "  snake.vim: Snake game in vim
 "  Last Change: Tue Jan 19 16:07:52 CST 2016
 "  Maintainer:  Jacob Gelbman <gelbman@gmail.com>
-"  Version:     1.0.0, for Vim 7.0+
+"  Version:     2.0.0, for Vim 7.0+
 "  URL:		http://github.com/zorgnax/vim-snake
 "
 " Installation:
