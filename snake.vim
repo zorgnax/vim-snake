@@ -34,6 +34,7 @@ function! s:init ()
 
     map <buffer> <silent> s :call <SID>start()<CR>
     map <buffer> <silent> q :call <SID>quit()<CR>
+    map <buffer> <silent> p :let b:pause = !b:pause<CR>
     map <buffer> <silent> h :call <SID>setdirection(0, -1)<CR>
     map <buffer> <silent> j :call <SID>setdirection(1, 0)<CR>
     map <buffer> <silent> k :call <SID>setdirection(-1, 0)<CR>
@@ -70,6 +71,7 @@ function! s:start ()
     let b:ox = 1
     let b:score = 0
     let b:gameover = 0
+    let b:pause = 0
     let b:apples = []
     let y = winheight(0) / 2
     let x = 0
@@ -100,6 +102,9 @@ function! s:updateframe ()
         call cursor(y + 1, x - 17)
         normal! R(Press q to quit, s to start again)
         call s:showscore()
+        return
+    endif
+    if b:pause
         return
     endif
     call s:showscore()
@@ -179,8 +184,8 @@ function! s:addhead (y, x)
     if x <= 0
         let x = winwidth(0) - 1
     endif
-    if x >= winwidth(0)
-        let x = x % winwidth(0) + 1
+    if x > winwidth(0)
+        let x = x % winwidth(0)
     endif
     let head = [y, x]
     call add(b:snake, head)
